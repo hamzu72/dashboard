@@ -1,7 +1,7 @@
 # Stock Dashboard
 to install node services
-npm install
+#npm install
 
 
 to run 
-npm run dev
+#npm run dev
