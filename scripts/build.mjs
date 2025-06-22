@@ -7,6 +7,7 @@ import tailwindcss from 'tailwindcss'
 const args = process.argv.slice(2)
 const isProd = args[0] === '--production'
 
+// Clean output directory
 await rimraf('dist')
 
 /**
@@ -37,14 +38,6 @@ const esbuildOpts = {
   ],
 }
 
-if (isProd) {
-  await esbuild.build(esbuildOpts)
-} else {
-  const ctx = await esbuild.context(esbuildOpts)
-  await ctx.watch()
-  const { hosts, port } = await ctx.serve()
-  console.log(`Running on:`)
-  hosts.forEach((host) => {
-    console.log(`http://${host}:${port}`)
-  })
-}
+// Always build statically
+await esbuild.build(esbuildOpts)
+console.log(`✅ Build complete${isProd ? ' (production)' : ''}. Output in ./dist`)
